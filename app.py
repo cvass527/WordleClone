@@ -12,6 +12,7 @@ app.secret_key = 'your_secret_key'
 @app.route('/word')
 def GetWord():
     word = ReadDictionary.ChooseRandomWord()
+    session['word'] = word
     return jsonify({'word': word})
 
 
@@ -22,6 +23,14 @@ def index():
 @app.route('/game')
 def game():
     return render_template('game.html')
+
+@app.route('/won')
+def won():
+    return render_template('won.html', word = session['word'])
+
+@app.route('/lost')
+def lost():
+    return render_template('lost.html', word = session['word'])
 
 
 @app.route("/submit_name", methods = ["POST"])

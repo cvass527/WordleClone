@@ -8,7 +8,7 @@ export class Wordle {
 
     initBoard() {
         const board = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             const row = [];
             for (let j = 0; j < 5; j++) {
                 row.push(new LetterGuess('-','Placeholder'));
@@ -22,7 +22,29 @@ export class Wordle {
     guessSubmission(userGuess){
         const result = this.checkGuess(userGuess)
         this.updateBoard(result)
-        const gameState = this.checkGameState(result)
+        this.handleGameState(result)
+    }
+
+    handleGameState(guessResult)
+    {
+        const letters = []
+        for (let i =0 ; i < 5; i++)
+        {
+            letters.push(guessResult[i].character)
+        }
+
+        const justWord = letters.join('')
+
+
+
+        if (justWord === this.word) {
+          window.location.href = '/won';
+          return 'win';
+        } else if (this.round > 6) {
+          window.location.href = '/lost';
+          return 'lose';
+        }
+        return 'ongoing';
     }
 
     updateBoard(userGuess) {
@@ -56,15 +78,6 @@ export class Wordle {
         }
 
         return result;
-    }
-
-    checkGameState(guessResult) {
-        if (guessResult === this.word) {
-          return 'win';
-        } else if (this.round >= 6) {
-          return 'lose';
-        }
-        return 'ongoing';
     }
 }
 

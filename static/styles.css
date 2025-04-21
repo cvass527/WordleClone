@@ -1,25 +1,50 @@
 /* styles.css */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.container {
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertical center */
+    align-items: center;     /* Horizontal center */
+    gap: 2rem;               /* Space between board and form */
+}
+
+/* Optionally, make the grid display rows vertically */
 .grid {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between rows */
+    gap: 0.3rem;
 }
 
 .row {
     display: flex;
-    gap: 10px; /* Space between tiles */
+    gap: 0.3rem;
 }
 
+
 .tile {
-    width: 50px;
-    height: 50px;
+    width: 8vw;
+    height: 8vw;
     border: 2px solid #ccc;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 3vw;
     text-transform: uppercase;
     font-weight: bold;
+    max-width: 100px;
+    max-height: 100px;
+    min-width: 40px;
+    min-height: 40px;
 }
 
 /* State-based colors */
