@@ -7,19 +7,14 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <div class="grid">
-        {% for row in board %}
-            <div class="row">
-                {% for tile in row %}
-                    <div class="tile">{{ tile }}</div>
-                {% endfor %}
-            </div>
-        {% endfor %}
-    </div>
-    <form action="/submit_guess" method="POST">
+    <div class="grid" id="grid"></div>
+    <form id="guess-form">
         <label for="guess">Enter your guess:</label>
         <input type="text" id="guess" name="guess" maxlength="5" required>
         <button type="submit">Submit Your Guess</button>
     </form>
+    <script type="module" src="{{ url_for('static', filename='UI.js') }}"></script>
+
+
 </body>
 </html>
