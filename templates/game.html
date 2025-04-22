@@ -7,13 +7,18 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
+
     <div class = "container">
+        <h1 class="main-title">Wordle Clone</h1>
+        <h2 class="welcome user">Hello, {{ user.name }}</h2>
+        <h3 class="winLoss">Wins: {{ user.wins }} Losses: {{user.losses}}</h3>
         <div class="grid" id="grid"></div>
         <form id="guess-form">
             <label for="guess">Enter your guess:</label>
             <input type="text" id="guess" name="guess" maxlength="5" required>
             <button type="submit">Submit Your Guess</button>
         </form>
+        <div class ="keyboard" id="keyboard"></div>
     </div>
 
     <script type="module" src="{{ url_for('static', filename='UI.js') }}"></script>

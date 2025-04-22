@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             game = new Wordle(data.word);  // Instantiate with the actual word
             console.log("Game initialized:", game);
             updateBoardDisplay(game.board);
+            updateKeyboardDisplay(game.keyboard);
         });
 
     // Set up your form handler here as in the previous answer
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game.guessSubmission(guess); // Call your JavaScript function
 
         updateBoardDisplay(game.board)
+        updateKeyboardDisplay(game.keyboard)
         guessInput.value = ''; // Optionally clear the input
     });
 });
@@ -40,6 +42,26 @@ function updateBoardDisplay(board) {
     gridDiv.innerHTML = ''; // Clear previous content
 
     for (let row of board) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'row';
+        for (let tile of row) {
+            const tileDiv = document.createElement('div');
+            tileDiv.className = 'tile ' + tile.state.toLowerCase();
+
+
+            tileDiv.textContent = tile.character;
+            rowDiv.appendChild(tileDiv);
+        }
+        gridDiv.appendChild(rowDiv);
+    }
+}
+
+function updateKeyboardDisplay(keyboard) {
+    // keyboard: 2D array, e.g. [['A', '-', '-', '-', '-'], ...]
+    const gridDiv = document.getElementById('keyboard');
+    gridDiv.innerHTML = ''; // Clear previous content
+
+    for (let row of keyboard) {
         const rowDiv = document.createElement('div');
         rowDiv.className = 'row';
         for (let tile of row) {

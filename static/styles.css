@@ -9,21 +9,21 @@ body {
     min-height: 100vh;
 }
 
-.container {
-    min-height: 100vh; /* Full viewport height */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Vertical center */
-    align-items: center;     /* Horizontal center */
-    gap: 2rem;               /* Space between board and form */
+.main-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    color: #333;
+    /* Optional: add a wordle-like effect */
+    font-family: 'Arial Black', Arial, sans-serif;
+    /* text-shadow for pop */
+    text-shadow: 2px 2px 4px #eee;
 }
 
-/* Optionally, make the grid display rows vertically */
-.grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-}
+
 
 .row {
     display: flex;
@@ -31,14 +31,58 @@ body {
 }
 
 
+#guess-form {
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+    z-index: 1;
+}
+
+.keyboard {
+    width: 100%;
+    /* Make it fixed or sticky at the bottom */
+    position: sticky;
+    bottom: 0;
+    background: #f9f9f9;
+    padding: 1rem 0 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.3em;
+}
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5vh;
+    padding-bottom: 120px; /* to avoid overlap with keyboard */
+}
+
+.grid {
+    max-height: 60vh;  /* fits 5-6 rows on most screens */
+    flex: 0 0 auto;
+    /* optional: center grid horizontally */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 0;
+}
+
 .tile {
-    width: 8vw;
-    height: 8vw;
+    width: clamp(40px, 5vw, 70px);
+    height: clamp(40px, 5vw, 70px);
+    font-size: clamp(1.1rem, 2.2vw, 2.6rem);
     border: 2px solid #ccc;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3vw;
     text-transform: uppercase;
     font-weight: bold;
     max-width: 100px;
@@ -46,6 +90,7 @@ body {
     min-width: 40px;
     min-height: 40px;
 }
+
 
 /* State-based colors */
 .tile.correct {

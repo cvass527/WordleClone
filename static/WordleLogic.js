@@ -4,6 +4,7 @@ export class Wordle {
         this.round = 1;
         this.word = wordToGuess.toUpperCase();
         this.board = this.initBoard();
+        this.keyboard = this.initKeyboard();
     }
 
     initBoard() {
@@ -16,6 +17,21 @@ export class Wordle {
             board.push(row);
         }
         return board;
+    }
+
+    initKeyboard(){
+        const keys = [['Q','W','E','R','T','Y','U','I','O','P'],
+                          ['A','S','D','F','G','H','J','K','L'],
+                          ['Z','X','C','V','B','N','M']]
+        const keyboard = []
+        for(let i = 0; i < 3; i++){
+            let keyboardRow = []
+            for(let j = 0; j < keys[i].length; j++){
+                keyboardRow.push(new LetterGuess(keys[i][j],'Placeholder'))
+            }
+            keyboard.push(keyboardRow)
+        }
+        return keyboard;
     }
 
 
@@ -53,6 +69,21 @@ export class Wordle {
         this.round++;
     }
 
+    updateKeyboard(myChar, newState)
+    {
+        for(let i = 0; i < 3; i++)
+        {
+            for(let j = 0; j < this.keyboard[i].length; j++)
+            {
+                if(myChar == this.keyboard[i][j].character)
+                {
+                    this.keyboard[i][j].state = newState
+                    return true
+                }
+            }
+        }
+    }
+
     checkGuess(userGuess) {
         const guess = userGuess.toUpperCase();
         const result = [];
@@ -63,22 +94,26 @@ export class Wordle {
           if (currentChar === this.word[i]) {
 
             result.push(new LetterGuess(currentChar, 'Correct'));
+            this.updateKeyboard(currentChar,'Correct')
 
           }
           else if (this.word.includes(currentChar)) {
 
             result.push(new LetterGuess(currentChar, 'IW'));
+            this.updateKeyboard(currentChar,'IW')
 
           }
           else {
 
             result.push(new LetterGuess(currentChar, 'NIW'));
-
+            this.updateKeyboard(currentChar,'NIW')
           }
         }
 
         return result;
     }
+
+
 }
 
 class LetterGuess{
