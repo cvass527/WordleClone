@@ -64,6 +64,7 @@ def AddNameAndStartGame():
     return redirect(url_for('game'))
 
 
+#adding a comment
 if __name__ == "__main__":
     app.run(debug=True)
 
